@@ -5,6 +5,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jsonapp/provider/base.dart';
+
+import 'data_page.dart';
 
 // This is a reimplementation of the default Flutter application
 // using riverpod.
@@ -14,9 +17,6 @@ void main() {
     const ProviderScope(child: MyApp()),
   );
 }
-
-/// Providers are declared globally and specify how to create a state
-final counterProvider = StateProvider((ref) => 0);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -35,35 +35,54 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Riverpod example'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Consumer(
-              builder: (context, ref, _) {
-                final count = ref.watch(counterProvider);
-                return Text(
-                  '$count',
-                  key: const Key('counterState'),
-                  style: Theme.of(context).textTheme.headlineMedium,
-                );
-              },
-            ),
-          ],
+        appBar: AppBar(
+          title: const Text('Riverpod example'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        key: const Key('increment_floatingActionButton'),
-        // The read method is a utility to read a provider without listening to it
-        onPressed: () => ref.read(counterProvider.notifier).state++,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('You have pushed the button this many times:'),
+              Consumer(
+                builder: (context, ref, _) {
+                  final count = ref.watch(counterProvider);
+                  return Text(
+                    '$count',
+                    key: const Key('counterState'),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: Stack(
+          children: [
+            Align(
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                heroTag: 'navigate',
+                key: const Key('increment_floatingActionButton'),
+                // The read method is a utility to read a provider without listening to it
+                onPressed: () => ref.read(counterProvider.notifier).state++,
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: FloatingActionButton(
+                  heroTag: 'add',
+                  child: const Icon(Icons.navigate_next),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const DataPage()),
+                    );
+                  }),
+            )
+          ],
+        ));
   }
 }

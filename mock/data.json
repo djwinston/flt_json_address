@@ -1,0 +1,292 @@
+{
+  "name": "",
+  "totalItemsInLocation": 22,
+  "totalUnitsInLocation": 1200817,
+  "childLocationsCount": 8,
+  "items": [
+    {
+      "name": "Ergonomic Keyboard E10",
+      "barcode": "8765432109",
+      "location": "",
+      "quantity": 11
+    },
+    {
+      "name": "Курточка abbibas",
+      "barcode": "8765432342",
+      "location": "",
+      "quantity": 1
+    },
+    {
+      "name": "Мивинна крабовая золотое издание",
+      "barcode": "8799432342",
+      "location": "",
+      "quantity": 1200500
+    }
+  ],
+  "childLocations": [
+    {
+      "name": "RoomA",
+      "totalItemsInLocation": 7,
+      "totalUnitsInLocation": 127,
+      "childLocationsCount": 2,
+      "items": [
+        {
+          "name": "Tablet Y10",
+          "barcode": "1234567890",
+          "location": "RoomA",
+          "quantity": 15
+        },
+        {
+          "name": "Wireless Charger",
+          "barcode": "9876543210",
+          "location": "RoomA",
+          "quantity": 18
+        },
+        {
+          "name": "Laptop Stand",
+          "barcode": "1987654321",
+          "location": "RoomA",
+          "quantity": 14
+        }
+      ],
+      "childLocations": [
+        {
+          "name": "Small Shelf",
+          "totalItemsInLocation": 2,
+          "totalUnitsInLocation": 40,
+          "childLocationsCount": 0,
+          "items": [
+            {
+              "name": "Laptop X200",
+              "barcode": "6345456457",
+              "location": "Small Shelf",
+              "quantity": 10
+            },
+            {
+              "name": "Screen Protector T5",
+              "barcode": "2198765430",
+              "location": "Small Shelf",
+              "quantity": 30
+            }
+          ],
+          "childLocations": []
+        },
+        {
+          "name": "Big Shelf2",
+          "totalItemsInLocation": 2,
+          "totalUnitsInLocation": 40,
+          "childLocationsCount": 1,
+          "items": [
+            {
+              "name": "Bluetooth Headphones",
+              "barcode": "6454534456",
+              "location": "Big Shelf2",
+              "quantity": 20
+            },
+            {
+              "name": "Tablet Cover A10",
+              "barcode": "3219876540",
+              "location": "Big Shelf2",
+              "quantity": 20
+            }
+          ],
+          "childLocations": [
+            {
+              "name": "Small Shelf3",
+              "totalItemsInLocation": 0,
+              "totalUnitsInLocation": 0,
+              "childLocationsCount": 1,
+              "items": [],
+              "childLocations": [
+                {
+                  "name": "Small Shelf4",
+                  "totalItemsInLocation": 0,
+                  "totalUnitsInLocation": 0,
+                  "childLocationsCount": 1,
+                  "items": [],
+                  "childLocations": [
+                    {
+                      "name": "Box 3",
+                      "totalItemsInLocation": 0,
+                      "totalUnitsInLocation": 0,
+                      "childLocationsCount": 0,
+                      "items": [],
+                      "childLocations": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "RoomB",
+      "totalItemsInLocation": 10,
+      "totalUnitsInLocation": 162,
+      "childLocationsCount": 4,
+      "items": [
+        {
+          "name": "Smartphone Z5",
+          "barcode": "987654321",
+          "location": "RoomB",
+          "quantity": 10
+        },
+        {
+          "name": "USB Flash Drive 64GB",
+          "barcode": "4321987650",
+          "location": "RoomB",
+          "quantity": 25
+        },
+        {
+          "name": "Wireless Mouse M510",
+          "barcode": "9876543211",
+          "location": "RoomB",
+          "quantity": 22
+        }
+      ],
+      "childLocations": [
+        {
+          "name": "Big Shelf",
+          "totalItemsInLocation": 2,
+          "totalUnitsInLocation": 20,
+          "childLocationsCount": 0,
+          "items": [
+            {
+              "name": "Smartphone A10",
+              "barcode": "3345456457",
+              "location": "Big Shelf",
+              "quantity": 8
+            },
+            {
+              "name": "Portable Speaker",
+              "barcode": "8765432190",
+              "location": "Big Shelf",
+              "quantity": 12
+            }
+          ],
+          "childLocations": []
+        },
+        {
+          "name": "Small Shelf2",
+          "totalItemsInLocation": 1,
+          "totalUnitsInLocation": 5,
+          "childLocationsCount": 0,
+          "items": [
+            {
+              "name": "Monitor W22",
+              "barcode": "5678901234",
+              "location": "Small Shelf2",
+              "quantity": 5
+            }
+          ],
+          "childLocations": []
+        },
+        {
+          "name": "Shelf4",
+          "totalItemsInLocation": 2,
+          "totalUnitsInLocation": 35,
+          "childLocationsCount": 0,
+          "items": [
+            {
+              "name": "Keyboard K120",
+              "barcode": "4321098765",
+              "location": "Shelf4",
+              "quantity": 25
+            },
+            {
+              "name": "Laptop X200",
+              "barcode": "6345456457",
+              "location": "Shelf4",
+              "quantity": 10
+            }
+          ],
+          "childLocations": []
+        },
+        {
+          "name": "Bin",
+          "totalItemsInLocation": 2,
+          "totalUnitsInLocation": 45,
+          "childLocationsCount": 0,
+          "items": [
+            {
+              "name": "Mouse M550",
+              "barcode": "6543210987",
+              "location": "Bin",
+              "quantity": 30
+            },
+            {
+              "name": "External Hard Drive",
+              "barcode": "5432198760",
+              "location": "Bin",
+              "quantity": 15
+            }
+          ],
+          "childLocations": []
+        }
+      ]
+    },
+    {
+      "name": "AAAAAAa",
+      "totalItemsInLocation": 2,
+      "totalUnitsInLocation": 16,
+      "childLocationsCount": 0,
+      "items": [
+        {
+          "name": "Smartwatch B12",
+          "barcode": "7654321980",
+          "location": "AAAAAAa",
+          "quantity": 7
+        },
+        {
+          "name": "Gaming Mouse G502",
+          "barcode": "6543219870",
+          "location": "AAAAAAa",
+          "quantity": 9
+        }
+      ],
+      "childLocations": []
+    },
+    {
+      "name": "Room C",
+      "totalItemsInLocation": 0,
+      "totalUnitsInLocation": 0,
+      "childLocationsCount": 0,
+      "items": [],
+      "childLocations": []
+    },
+    {
+      "name": "Room D",
+      "totalItemsInLocation": 0,
+      "totalUnitsInLocation": 0,
+      "childLocationsCount": 0,
+      "items": [],
+      "childLocations": []
+    },
+    {
+      "name": "Room E",
+      "totalItemsInLocation": 0,
+      "totalUnitsInLocation": 0,
+      "childLocationsCount": 0,
+      "items": [],
+      "childLocations": []
+    },
+    {
+      "name": "Box 2",
+      "totalItemsInLocation": 0,
+      "totalUnitsInLocation": 0,
+      "childLocationsCount": 0,
+      "items": [],
+      "childLocations": []
+    },
+    {
+      "name": "Box 1",
+      "totalItemsInLocation": 0,
+      "totalUnitsInLocation": 0,
+      "childLocationsCount": 0,
+      "items": [],
+      "childLocations": []
+    }
+  ]
+}
