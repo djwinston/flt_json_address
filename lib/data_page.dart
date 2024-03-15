@@ -4,6 +4,7 @@ import 'package:jsonapp/provider/base.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 
+import 'helpers/path_map.dart';
 import 'models/agregate.dart';
 
 class DataPage extends ConsumerStatefulWidget {
@@ -23,7 +24,22 @@ class _DataPage extends ConsumerState<DataPage> {
     setState(() {
       jsonData = data;
     });
-    logger.d(data.toMap());
+    final path = selectMapPath(jsonData.toMap(), [
+          'childLocations',
+          0,
+          'childLocations',
+          1,
+          'childLocations',
+          0,
+          'childLocations',
+          0,
+          'childLocations',
+          0
+        ]) ??
+        'lol';
+    logger.d(path);
+    logger
+        .d(jsonData.childLocations[0].childLocations[1].childLocations[0].path);
   }
 
   @override

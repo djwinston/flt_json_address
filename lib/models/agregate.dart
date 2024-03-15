@@ -4,7 +4,8 @@
 
 import 'dart:convert';
 
-Aggregate aggregateFromMap(String str) => Aggregate.fromMap(json.decode(str));
+Aggregate aggregateFromMap(String str) =>
+    Aggregate.fromMap(json.decode(str), []);
 
 String aggregateToMap(Aggregate data) => json.encode(data.toMap());
 
@@ -13,6 +14,7 @@ class Aggregate {
   int totalItemsInLocation;
   int totalUnitsInLocation;
   int childLocationsCount;
+  List<int>? path;
   List<Item> items;
   List<Aggregate> childLocations;
 
@@ -21,6 +23,7 @@ class Aggregate {
     required this.totalItemsInLocation,
     required this.totalUnitsInLocation,
     required this.childLocationsCount,
+    required this.path,
     required this.items,
     required this.childLocations,
   });
@@ -30,6 +33,7 @@ class Aggregate {
     int? totalItemsInLocation,
     int? totalUnitsInLocation,
     int? childLocationsCount,
+    List<int>? path,
     List<Item>? items,
     List<Aggregate>? childLocations,
   }) =>
@@ -38,19 +42,27 @@ class Aggregate {
         totalItemsInLocation: totalItemsInLocation ?? this.totalItemsInLocation,
         totalUnitsInLocation: totalUnitsInLocation ?? this.totalUnitsInLocation,
         childLocationsCount: childLocationsCount ?? this.childLocationsCount,
+        path: path ?? this.path,
         items: items ?? this.items,
         childLocations: childLocations ?? this.childLocations,
       );
 
-  factory Aggregate.fromMap(Map<String, dynamic> json) => Aggregate(
-        name: json["name"],
-        totalItemsInLocation: json["totalItemsInLocation"],
-        totalUnitsInLocation: json["totalUnitsInLocation"],
-        childLocationsCount: json["childLocationsCount"],
-        items: List<Item>.from(json["items"].map((x) => Item.fromMap(x))),
-        childLocations: List<Aggregate>.from(
-            json["childLocations"].map((x) => Aggregate.fromMap(x))),
-      );
+  factory Aggregate.fromMap(Map<String, dynamic> json, List<int>? path) {
+    final currentPath = path ?? [];
+    return Aggregate(
+      name: json["name"],
+      totalItemsInLocation: json["totalItemsInLocation"],
+      totalUnitsInLocation: json["totalUnitsInLocation"],
+      childLocationsCount: json["childLocationsCount"],
+      path: currentPath,
+      items: List<Item>.from(json["items"].map((x) => Item.fromMap(x))),
+      childLocations: (json['childLocations'] as List<dynamic>)
+          .asMap()
+          .entries
+          .map((el) => Aggregate.fromMap(el.value, [...currentPath, el.key]))
+          .toList(),
+    );
+  }
 
   Map<String, dynamic> toMap() => {
         "name": name,
