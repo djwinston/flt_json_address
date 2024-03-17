@@ -34,7 +34,7 @@ class _ListPage extends ConsumerState<ListPage> {
     logger.d('currentTargetPath $currentTargetPath');
     logger.d('aggr map $ref.watch(dataProvider.notifier).state');
     logger.d(selectMapPath(
-        (ref.watch(dataProvider.notifier).state), currentTargetPath));
+        (ref.watch(dataProvider.notifier).state?.toMap()), currentTargetPath));
     final Aggregate? currentTargetLocationList = currentPath.isEmpty
         ? ref.watch(dataProvider.notifier).state
         : selectMapPath(
