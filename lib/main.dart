@@ -4,16 +4,16 @@
 // BSD-style license that can be found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsonapp/provider/base.dart';
+import 'package:logger/logger.dart';
 
-import 'data_page.dart';
+import 'list_page.dart';
+import 'models/agregate.dart';
 
-// This is a reimplementation of the default Flutter application
-// using riverpod.
 void main() {
   runApp(
-    // Adding ProviderScope enables Riverpod for the entire project
     const ProviderScope(child: MyApp()),
   );
 }
@@ -34,6 +34,15 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final logger = Logger();
+    Future<void> loadJsonAsset() async {
+      final String jsonString = await rootBundle.loadString('mock/data.json');
+      final data = aggregateFromMap(jsonString);
+      ref.read(dataProvider.notifier).state = data;
+
+      logger.d(data.path);
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Riverpod example'),
@@ -43,17 +52,46 @@ class MyHomePage extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Text('You have pushed the button this many times:'),
+              const Text('totalUnitsInLocation:'),
               Consumer(
                 builder: (context, ref, _) {
-                  final count = ref.watch(counterProvider);
+                  final totalUnitsInLocation =
+                      ref.watch(dataProvider)?.totalUnitsInLocation ?? 0;
+
                   return Text(
-                    '$count',
+                    '$totalUnitsInLocation',
                     key: const Key('counterState'),
                     style: Theme.of(context).textTheme.headlineMedium,
                   );
                 },
               ),
+              const Text('totalItemsInLocation:'),
+              Consumer(
+                builder: (context, ref, _) {
+                  final totalItemsInLocation =
+                      ref.watch(dataProvider)?.totalItemsInLocation ?? 0;
+
+                  return Text(
+                    '$totalItemsInLocation',
+                    key: const Key('counterState'),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  );
+                },
+              ),
+              const Text('childLocationsCount:'),
+              Consumer(
+                builder: (context, ref, _) {
+                  final childLocationsCount =
+                      ref.watch(dataProvider)?.childLocationsCount ?? 0;
+                  return Text(
+                    '$childLocationsCount',
+                    key: const Key('counterState'),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  );
+                },
+              ),
+              TextButton(
+                  onPressed: () => loadJsonAsset(), child: const Text('Load'))
             ],
           ),
         ),
@@ -62,23 +100,12 @@ class MyHomePage extends ConsumerWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
-                heroTag: 'navigate',
-                key: const Key('increment_floatingActionButton'),
-                // The read method is a utility to read a provider without listening to it
-                onPressed: () => ref.read(counterProvider.notifier).state++,
-                tooltip: 'Increment',
-                child: const Icon(Icons.add),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: FloatingActionButton(
                   heroTag: 'add',
                   child: const Icon(Icons.navigate_next),
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const DataPage()),
+                      MaterialPageRoute(builder: (context) => const ListPage()),
                     );
                   }),
             )
