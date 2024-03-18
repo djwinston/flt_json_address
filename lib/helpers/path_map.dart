@@ -1,3 +1,5 @@
+import '../models/agregate.dart';
+
 dynamic selectMapPath(dynamic map, List<dynamic> path) {
   var result = map;
 
@@ -20,4 +22,23 @@ dynamic selectMapPath(dynamic map, List<dynamic> path) {
   }
 
   return result;
+}
+
+enum DataType { childLocations, items }
+
+Aggregate? selectMapbyPath(Aggregate map, List<int> path) {
+  var result = map;
+  bool isPath;
+
+  isPath = path.every((key) {
+    if (key > map.childLocations.length - 1) {
+      return false;
+    } else {
+      final Aggregate item = result.childLocations[key];
+      result = item;
+      return true;
+    }
+  });
+
+  return isPath ? result : null;
 }

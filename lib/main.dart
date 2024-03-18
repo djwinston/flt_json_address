@@ -1,13 +1,7 @@
-// https://dartpad.dev/?id=ef06ab3ce0b822e6cc5db0575248e6e2
-// Copyright (c) 2018, the Dart project authors.  Please see the AUTHORS file
-// for details. All rights reserved. Use of this source code is governed by a
-// BSD-style license that can be found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsonapp/provider/base.dart';
-import 'package:logger/logger.dart';
 
 import 'list_page.dart';
 import 'models/agregate.dart';
@@ -23,8 +17,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MyHomePage(),
+    return MaterialApp(
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => const MyHomePage(),
+        '/details': (BuildContext context) => const ListPage(),
+      },
     );
   }
 }
@@ -34,13 +32,10 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final logger = Logger();
     Future<void> loadJsonAsset() async {
       final String jsonString = await rootBundle.loadString('mock/data.json');
       final data = aggregateFromMap(jsonString);
       ref.read(dataProvider.notifier).state = data;
-
-      logger.d(data.path);
     }
 
     return Scaffold(
@@ -103,10 +98,7 @@ class MyHomePage extends ConsumerWidget {
                   heroTag: 'add',
                   child: const Icon(Icons.navigate_next),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const ListPage()),
-                    );
+                    Navigator.pushNamed(context, '/details');
                   }),
             )
           ],

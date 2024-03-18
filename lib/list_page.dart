@@ -22,23 +22,12 @@ class _ListPage extends ConsumerState<ListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final logger = Logger();
+    // final logger = Logger();
     List<int> currentPath = ref.watch(pathProvider) ?? [];
-    final List<dynamic> currentTargetPath = currentPath.isEmpty
-        ? ['childLocations']
-        : currentPath.fold(
-            [],
-            (previousValue, element) =>
-                [...previousValue, 'childLocations', element]);
-    logger.d('currentPath $currentPath');
-    logger.d('currentTargetPath $currentTargetPath');
-    logger.d('aggr map $ref.watch(dataProvider.notifier).state');
-    logger.d(selectMapPath(
-        (ref.watch(dataProvider.notifier).state?.toMap()), currentTargetPath));
     final Aggregate? currentTargetLocationList = currentPath.isEmpty
         ? ref.watch(dataProvider.notifier).state
-        : selectMapPath(
-            ref.watch(dataProvider.notifier).state, currentTargetPath);
+        : selectMapbyPath(ref.watch(dataProvider.notifier).state!, currentPath);
+
     final totalItemsInLocation =
         currentTargetLocationList?.totalItemsInLocation ?? 0;
     final childLocationsCount =
@@ -47,10 +36,29 @@ class _ListPage extends ConsumerState<ListPage> {
         currentTargetLocationList?.totalUnitsInLocation ?? 0;
     final items = currentTargetLocationList?.items ?? [];
     final locations = currentTargetLocationList?.childLocations ?? [];
+    final title = currentTargetLocationList != null &&
+            currentTargetLocationList.name.isNotEmpty
+        ? currentTargetLocationList.name
+        : 'Root';
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text(title),
+        leading: GestureDetector(
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onTap: () {
+            if (currentPath.isEmpty) {
+              Navigator.pushNamed(context, '/');
+            } else {
+              currentPath.removeLast();
+              ref.read(pathProvider.notifier).state = currentPath;
+              Navigator.pushNamed(context, '/details');
+            }
+          },
+        ),
       ),
       body: Center(
         child: Scrollbar(
@@ -63,11 +71,11 @@ class _ListPage extends ConsumerState<ListPage> {
                         height: 70,
                         child: Row(children: [
                           Text('$totalItemsInLocation loc |',
-                              style: const TextStyle(fontSize: 30)),
+                              style: const TextStyle(fontSize: 20)),
                           Text('$childLocationsCount unt |',
-                              style: const TextStyle(fontSize: 30)),
+                              style: const TextStyle(fontSize: 20)),
                           Text('$totalUnitsInLocation itm |',
-                              style: const TextStyle(fontSize: 30))
+                              style: const TextStyle(fontSize: 20))
                         ]))),
                 SliverList(
                   delegate: SliverChildBuilderDelegate(
@@ -79,9 +87,8 @@ class _ListPage extends ConsumerState<ListPage> {
                         padding: const EdgeInsets.all(6.0),
                         child: GestureDetector(
                           onTap: () => {
-                            logger.d(currentLoc.path),
                             ref.read(pathProvider.notifier).state =
-                                currentLoc.path
+                                currentLoc.path,
                           },
                           child: Container(
                             color: Colors.greenAccent,

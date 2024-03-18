@@ -14,7 +14,7 @@ class Aggregate {
   int totalItemsInLocation;
   int totalUnitsInLocation;
   int childLocationsCount;
-  List<int>? path;
+  List<int> path;
   List<Item> items;
   List<Aggregate> childLocations;
 
@@ -69,10 +69,18 @@ class Aggregate {
         "totalItemsInLocation": totalItemsInLocation,
         "totalUnitsInLocation": totalUnitsInLocation,
         "childLocationsCount": childLocationsCount,
+        "path": List<int>.from(path!.map((e) => e)),
         "items": List<dynamic>.from(items.map((x) => x.toMap())),
         "childLocations":
             List<dynamic>.from(childLocations.map((x) => x.toMap())),
       };
+
+  get summary {
+    var gifts = Map<String, int>();
+    gifts['totalItemsInLocation'] = totalItemsInLocation;
+    gifts['totalUnitsInLocation'] = totalUnitsInLocation;
+    gifts['childLocationsCount'] = childLocationsCount;
+  }
 }
 
 class Item {
