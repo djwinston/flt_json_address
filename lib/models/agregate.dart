@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+enum Sum { totalItemsInLocation, totalUnitsInLocation, childLocationsCount }
+
 Aggregate aggregateFromMap(String str) =>
     Aggregate.fromMap(json.decode(str), []);
 
@@ -75,12 +77,13 @@ class Aggregate {
             List<dynamic>.from(childLocations.map((x) => x.toMap())),
       };
 
-  get summary {
-    var gifts = Map<String, int>();
-    gifts['totalItemsInLocation'] = totalItemsInLocation;
-    gifts['totalUnitsInLocation'] = totalUnitsInLocation;
-    gifts['childLocationsCount'] = childLocationsCount;
-  }
+  // Map<Sum, int> get summary {
+  //   var gifts = Map<Sum, int>();
+  //   gifts[Sum.totalItemsInLocation] = totalItemsInLocation;
+  //   gifts[Sum.totalUnitsInLocation] = totalUnitsInLocation;
+  //   gifts[Sum.childLocationsCount] = childLocationsCount;
+  //   return gifts;
+  // }
 }
 
 class Item {

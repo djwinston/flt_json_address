@@ -12,6 +12,7 @@ dependencies:
   flutter_riverpod: ^2.3.6
   logger: ^2.1.0
   sliver_tools: ^0.2.12
+  app_bar_with_search_switch: ^1.8.5
 
 dev_dependencies:
   flutter_test:

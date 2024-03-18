@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jsonapp/provider/base.dart';
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import 'helpers/path_map.dart';
@@ -19,6 +19,8 @@ class _ListPage extends ConsumerState<ListPage> {
   void initState() {
     super.initState();
   }
+
+  final TextEditingController? editTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
